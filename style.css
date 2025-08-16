@@ -1,0 +1,139 @@
+/* --- Super CSS Drop-in --- */
+:root{
+    --bg1:#0f172a;           /* slate-900 */
+    --bg2:#1e293b;           /* slate-800 */
+    --card:rgba(255,255,255,0.08);
+    --border:rgba(255,255,255,0.14);
+    --text:#e5e7eb;          /* slate-200 */
+    --muted:#94a3b8;         /* slate-400 */
+    --accent:#7c3aed;        /* violet-600 */
+    --accent-2:#22d3ee;      /* cyan-400 */
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  
+  @media (prefers-color-scheme: light){
+    :root{
+      --bg1:#f8fafc;         /* slate-50 */
+      --bg2:#eef2ff;         /* indigo-50 */
+      --card:rgba(255,255,255,0.82);
+      --border:rgba(15, 23, 42, 0.08);
+      --text:#0f172a;        /* slate-900 */
+      --muted:#475569;       /* slate-600 */
+      --accent:#6d28d9;      /* violet-700 */
+      --accent-2:#0ea5e9;    /* sky-500 */
+      --shadow:0 12px 30px rgba(2,6,23,.08);
+    }
+  }
+  
+  *{ box-sizing:border-box; }
+  
+  body{
+    margin:0;
+    min-height:100dvh;
+    font:16px/1.5 ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    color:var(--text);
+    background:
+      radial-gradient(1200px 1200px at 10% -20%, rgba(124,58,237,.25), transparent 60%),
+      radial-gradient(900px 900px at 110% 20%, rgba(34,211,238,.18), transparent 55%),
+      linear-gradient(135deg,var(--bg1),var(--bg2));
+    display:grid;
+    place-items:center;
+    padding:32px;
+    overflow-x:hidden;
+  }
+  
+  /* Container feel even without extra HTML */
+  h1, textarea, button{ max-width: 920px; width: 100%; }
+  
+  h1{
+    margin:0 0 16px 0;
+    font-size: clamp(28px, 4vw, 40px);
+    letter-spacing:-0.02em;
+    line-height:1.15;
+    text-shadow: 0 1px 0 rgba(0,0,0,.06);
+    background: linear-gradient(90deg, var(--text), rgba(255,255,255,.7));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  
+  textarea{
+    display:block;
+    margin: 0 auto;
+    height: 260px;
+    padding: 18px 20px;
+    border-radius: 16px;
+    border:1px solid var(--border);
+    background: var(--card);
+    color:var(--text);
+    backdrop-filter: blur(10px) saturate(120%);
+    box-shadow: var(--shadow);
+    outline: none;
+    font-size: 16px;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .08s ease;
+    resize: vertical;
+  }
+  
+  textarea::placeholder{ color: var(--muted); }
+  
+  textarea:focus{
+    border-color: color-mix(in srgb, var(--accent) 60%, white);
+    box-shadow:
+      0 0 0 6px color-mix(in srgb, var(--accent) 22%, transparent),
+      var(--shadow);
+    transform: translateY(-1px);
+  }
+  
+  button{
+    display: inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin: 14px auto 0;
+    padding: 14px 22px;
+    border: 0;
+    border-radius: 14px;
+    font-weight: 700;
+    letter-spacing:.2px;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: white;
+    box-shadow: 0 12px 20px rgba(124,58,237,.28), 0 6px 10px rgba(34,211,238,.18);
+    transition: transform .08s ease, box-shadow .18s ease, filter .18s ease;
+  }
+  
+  button:hover{ transform: translateY(-2px); filter: brightness(1.03); }
+  button:active{ transform: translateY(0); }
+  
+  button:focus-visible{
+    outline: 0;
+    box-shadow:
+      0 0 0 8px color-mix(in srgb, var(--accent) 28%, transparent),
+      0 12px 20px rgba(124,58,237,.28);
+  }
+  
+  /* Tiny helper for a subtle floating animation */
+  @keyframes floaty {
+    from { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+    to { transform: translateY(0px); }
+  }
+  textarea:hover{ animation: floaty 6s ease-in-out infinite; }
+  
+  /* Make spacing nice on small screens */
+  @media (max-width: 640px){
+    body{ padding:20px; }
+    textarea{ height: 220px; border-radius: 14px; }
+    button{ width:100%; }
+  }
+  .card{
+    width: min(960px, 100%);
+    padding: 28px;
+    border-radius: 20px;
+    border:1px solid var(--border);
+    background: var(--card);
+    backdrop-filter: blur(12px) saturate(120%);
+    box-shadow: var(--shadow);
+  }
+  .card > *{ display:block; margin-left:auto; margin-right:auto; }
+    

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Text to PDF</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 30px; }
+        textarea { width: 80%; height: 200px; padding: 10px; font-size: 16px; }
+        button { margin-top: 10px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Text to PDF Converter</h1>
+        <textarea id="userText" placeholder="Type or paste your text here..."></textarea><br>
+        <button onclick="generatePDF()">Generate PDF</button>
+      </div>
+
+    <script>
+        async function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const text = document.getElementById('userText').value;
+
+            // Split text into lines to prevent overflow
+            const lines = doc.splitTextToSize(text, 180);
+            doc.text(lines, 10, 10);
+
+            doc.save("output.pdf");
+        }
+    </script>
+</body>
+</html>
